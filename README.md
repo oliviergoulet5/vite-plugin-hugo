@@ -69,17 +69,7 @@ Reference your Vite assets in your Hugo templates:
 
 ### Development
 
-Run Hugo server in one terminal:
-
-```bash
-hugo server
-```
-
-Run Vite in another terminal:
-
-```bash
-npm run dev
-```
+Run `vite` to spin up a Vite server and Hugo server. 
 
 Vite will watch your `src/` files and rebuild to `public/assets/`. Hugo's live reload will refresh the browser.
 
