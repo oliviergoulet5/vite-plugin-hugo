@@ -9,7 +9,13 @@ export default defineConfig({
       fileName: (format) => `index.${format === "es" ? "mjs" : "js"}`,
     },
     rollupOptions: {
-      external: ["vite"],
+      external: [
+        "vite",
+        "node:child_process",
+        "node:fs",
+        "node:path",
+        "node:os",
+      ],
       output: {
         exports: "named",
       },
