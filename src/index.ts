@@ -8,10 +8,16 @@ import { build } from "vite";
 export interface HugoPluginOptions {
   hugoBin?: string;
   outDir?: string;
+  watch?: string;
+  hugoArgs?: string[];
 }
 
 export function hugoPlugin(options: HugoPluginOptions = {}): Plugin {
-  const { hugoBin, outDir = "./static/assets" } = options;
+  const { 
+    hugoBin, 
+    hugoArgs = ["server", "--ignoreCache", "--noHTTPCache"],
+    outDir = "./static/assets",
+  } = options;
 
   let isServe = false;
   let hugoProcess: ChildProcess;
@@ -65,7 +71,7 @@ export function hugoPlugin(options: HugoPluginOptions = {}): Plugin {
       // Spawn Hugo server with cache disabled to ensure fresh builds
       hugoProcess = spawn(
         hugoBin ?? "hugo",
-        ["server", "--ignoreCache", "--noHTTPCache"],
+        hugoArgs,
         {
           stdio: "inherit",
         },
