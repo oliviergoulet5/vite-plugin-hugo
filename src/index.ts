@@ -9,7 +9,7 @@ export interface HugoPluginOptions {
   hugoBin?: string;
   outDir?: string;
   watch?: string;
-  hugoArgs?: string[];
+  hugoServerArgs?: string[];
 }
 
 /**
@@ -23,7 +23,7 @@ export interface HugoPluginOptions {
 export function hugoPlugin(options: HugoPluginOptions = {}): Plugin {
   const {
     hugoBin,
-    hugoArgs = ["server", "--ignoreCache", "--noHTTPCache"],
+    hugoServerArgs = ["server"],
     outDir = "./static/assets",
   } = options;
 
@@ -71,7 +71,7 @@ export function hugoPlugin(options: HugoPluginOptions = {}): Plugin {
     },
 
     async configureServer(server) {
-      const hugoProcess = startHugoServer(hugoBin, hugoArgs);
+      const hugoProcess = startHugoServer(hugoBin, hugoServerArgs);
       setupCleanupOnServerClose(server, hugoProcess);
 
       await runBuild(tempDir, outDir);
